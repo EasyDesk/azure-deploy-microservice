@@ -37,7 +37,7 @@ on:
 
 jobs:
   publish:
-    name: Publish to Azure App Service slot
+    name: Deploy microservice to Azure
     runs-on: windows-2019
     concurrency: ${{ inputs.slot-name }}
     steps:
