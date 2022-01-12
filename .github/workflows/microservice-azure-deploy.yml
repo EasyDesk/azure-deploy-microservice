@@ -3,6 +3,11 @@ name: Publish to Azure App Service
 on:
   workflow_call:
     inputs:
+      environment:
+        type: string
+        description: The Github environment used to run the deployment job.
+        required: false
+        default: ''
       artifact-name:
         type: string
         description: The name of the artifact to publish.
@@ -43,6 +48,7 @@ jobs:
     name: Deploy microservice to Azure
     runs-on: windows-2019
     concurrency: deploy-${{ inputs.app-name }}-${{ inputs.slot-name }}
+    environment: ${{ inputs.environment }}
     steps:
       - uses: actions/download-artifact@v2
         with:
