@@ -42,7 +42,7 @@ jobs:
   publish:
     name: Deploy microservice to Azure
     runs-on: windows-2019
-    concurrency: ${{ inputs.slot-name }}
+    concurrency: deploy-${{ inputs.slot-name || 'production' }}
     steps:
       - uses: actions/download-artifact@v2
         with:
@@ -68,7 +68,7 @@ jobs:
         with:
           package: ${{ inputs.publish-dir }}
           app-name: ${{ inputs.app-name }}
-          slot-name: ${{ inputs.slot-name }}
+          slot-name: ${{ inputs.slot-name || 'production' }}
       - name: Restart the web app
         run: |
           if [[ -n '${{ inputs.slot-name }}' ]]; then
