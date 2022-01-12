@@ -53,7 +53,7 @@ jobs:
           creds: ${{ secrets.azure-credentials }}
       - name: Stop the web app
         run: |
-          if [[ -n '${{ inputs.slot-name }}' ]]; then
+          if [[ -n '${{ inputs.slot-name }}' ]] ; then
             SLOT='--slot ${{ inputs.slot-name }}'
           fi
           az webapp stop --resource-group '${{ inputs.resource-group }}' --name '${{ inputs.app-name }}' $SLOT
@@ -71,7 +71,7 @@ jobs:
           slot-name: ${{ inputs.slot-name || 'production' }}
       - name: Restart the web app
         run: |
-          if [[ -n '${{ inputs.slot-name }}' ]]; then
+          if [[ -n '${{ inputs.slot-name }}' ]] ; then
             SLOT='--slot ${{ inputs.slot-name }}'
           fi
           az webapp start --resource-group '${{ inputs.resource-group }}' --name '${{ inputs.app-name }}' $SLOT
