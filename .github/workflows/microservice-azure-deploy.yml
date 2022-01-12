@@ -49,9 +49,7 @@ jobs:
         with:
           creds: ${{ secrets.azure-credentials }}
       - name: Stop the web app
-        uses: azure/CLI@v1
-        with:
-          inlineScript: az webapp stop --name '${{ inputs.app-name }}' --slot '${{ inputs.slot-name }}'
+        run: az webapp stop --name '${{ inputs.app-name }}' --slot '${{ inputs.slot-name }}'
       - name: Apply database migrations
         uses: azure/sql-action@v1
         with:
@@ -65,6 +63,4 @@ jobs:
           app-name: ${{ inputs.app-name }}
           slot-name: ${{ inputs.slot-name }}
       - name: Start the web app
-        uses: azure/CLI@v1
-        with:
-          inlineScript: az webapp start --name '${{ inputs.app-name }}' --slot '${{ inputs.slot-name }}'
+        run: az webapp start --name '${{ inputs.app-name }}' --slot '${{ inputs.slot-name }}'
